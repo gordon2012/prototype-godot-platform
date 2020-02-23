@@ -19,6 +19,14 @@ config/name="prototype-godot-platform"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Global.gd"
+
+[display]
+
+window/size/always_on_top=true
+
 [input]
 
 enter_door={

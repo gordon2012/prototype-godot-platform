@@ -25,13 +25,22 @@ __meta__ = {
 
 [node name="Door" parent="." instance=ExtResource( 3 )]
 position = Vector2( 352, -160 )
-target = NodePath("../Door2")
+inner_target = NodePath("../Door2")
 
 [node name="Door2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 224, -32 )
-target = NodePath("../Door")
+inner_target = NodePath("../Door")
 
-[node name="Player" parent="." groups=[
-"Player",
-] instance=ExtResource( 2 )]
-position = Vector2( -288, -320 )
+[node name="Door3" parent="." instance=ExtResource( 3 )]
+position = Vector2( -160, -96 )
+outer_world = "res://World2.tscn"
+outer_target = "Door"
+
+[node name="Door4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -32, 32 )
+outer_world = "res://World2.tscn"
+outer_target = "Door4"
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( -288, -304 )
+test = "TEST1"
