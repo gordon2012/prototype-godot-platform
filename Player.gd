@@ -1,14 +1,10 @@
 extends KinematicBody2D
 
-export(String) var test = null
-
 const UP = Vector2(0, -1)
 const GRAVITY = 20
 const JUMP_HEIGHT = -550
 
 var motion = Vector2()
-
-var teleport_target = null
 
 func _ready():
 	if Global.teleport_target != null:

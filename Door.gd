@@ -9,6 +9,9 @@ export(String) var outer_target = null
 
 var player_in_door
 
+func _ready():
+	$Popup.hide()
+
 func _process(_delta):
 	if Input.is_action_just_pressed("enter_door") and player_in_door == true:
 		if inner_target != null:
@@ -20,7 +23,9 @@ func _process(_delta):
 func _on_Door_body_entered(body):
 	if body.is_in_group("Player"):
 		player_in_door = true
+		$Popup.show()
 
 func _on_Door_body_exited(body):
 	if body.is_in_group("Player"):
 		player_in_door = false
+		$Popup.hide()

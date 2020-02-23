@@ -1,17 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Tiles/door_openTop.png" type="Texture" id=1]
 [ext_resource path="res://Tiles/door_openMid.png" type="Texture" id=2]
 [ext_resource path="res://Door.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/modern-15-arrow_right.svg.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/grey_sliderDown.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 56 )
+extents = Vector2( 25, 45 )
 
 [node name="Door" type="Area2D"]
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -73 )
@@ -22,7 +21,21 @@ position = Vector2( 0, -3 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -13 )
 shape = SubResource( 1 )
+
+[node name="Popup" type="Node2D" parent="."]
+position = Vector2( 0, -5 )
+
+[node name="grey_sliderDown" type="Sprite" parent="Popup"]
+position = Vector2( 0, -96 )
+scale = Vector2( 1.64286, 1.64286 )
+texture = ExtResource( 5 )
+
+[node name="modern-15-arrow_rightsvg" type="Sprite" parent="Popup"]
+position = Vector2( 0, -103.3 )
+rotation = -1.57079
+scale = Vector2( 2.01224, 2.01224 )
+texture = ExtResource( 4 )
 [connection signal="body_entered" from="." to="." method="_on_Door_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Door_body_exited"]

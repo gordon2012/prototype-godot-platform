@@ -43,4 +43,3 @@ outer_target = "Door4"
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -288, -304 )
-test = "TEST1"
