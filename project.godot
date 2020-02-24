@@ -35,6 +35,10 @@ enter_door={
  ]
 }
 
+[memory]
+
+limits/message_queue/max_size_kb=1000000
+
 [rendering]
 
 quality/2d/use_pixel_snap=true

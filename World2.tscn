@@ -12,7 +12,7 @@ format = 1
 tile_data = PoolIntArray( 262144, 0, 6, 262145, 0, 196609, 262146, 0, 196609, 262147, 0, 196609, 262148, 0, 196609, 262149, 0, 196609, 262150, 0, 196609, 262151, 0, 196609, 262152, 0, 7, 327680, 0, 65541, 327688, 0, 65541, 393216, 0, 65541, 393224, 0, 65541, 458752, 0, 65541, 458760, 0, 65541, 524288, 0, 65541, 524296, 0, 65541, 589824, 0, 65541, 589832, 0, 65541, 720895, 0, 196608, 655360, 0, 196611, 655361, 0, 196609, 655362, 0, 196609, 655363, 0, 196609, 655364, 0, 196609, 655365, 0, 196609, 655366, 0, 196609, 655367, 0, 196609, 655368, 0, 65543 )
 
 [node name="Door" parent="." instance=ExtResource( 3 )]
-position = Vector2( 528, 224 )
+position = Vector2( 160, 224 )
 outer_world = "res://World.tscn"
 outer_target = "Door3"
 
@@ -28,6 +28,11 @@ inner_target = NodePath("../Door2")
 position = Vector2( 480, 608 )
 outer_world = "res://World.tscn"
 outer_target = "Door4"
+
+[node name="Door5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 544, 224 )
+outer_world = "res://World3.tscn"
+outer_target = "Door"
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 32, 208 )
