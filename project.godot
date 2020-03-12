@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="prototype-godot-platform"
-run/main_scene="res://World.tscn"
+run/main_scene="res://World3.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -25,7 +25,13 @@ Global="*res://Global.gd"
 
 [display]
 
+window/size/width=1820
+window/size/height=1024
 window/size/always_on_top=true
+window/size/test_width=910
+window/size/test_height=512
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [input]
 

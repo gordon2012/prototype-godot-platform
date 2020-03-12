@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Tiles/Sky.png" type="Texture" id=6]
+
+[node name="SkyBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+position = Vector2( 0, -640 )
+motion_scale = Vector2( 0.2, 0 )
+motion_mirroring = Vector2( 1920, 0 )
+
+[node name="Sky" type="Sprite" parent="ParallaxLayer"]
+texture = ExtResource( 6 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1920, 1280 )

@@ -1,12 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://DirtAutoTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Door.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ForestBackground.tscn" type="PackedScene" id=4]
 
 [sub_resource type="TileSet" id=1]
 
 [node name="World" type="Node"]
+
+[node name="ForestBackground" parent="." instance=ExtResource( 4 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
