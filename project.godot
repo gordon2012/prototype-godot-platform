@@ -41,6 +41,11 @@ enter_door={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="standard"
+2d_physics/layer_2="bounce"
+
 [memory]
 
 limits/message_queue/max_size_kb=1000000

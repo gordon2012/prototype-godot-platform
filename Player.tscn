@@ -20,6 +20,11 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "Jump",
@@ -29,16 +34,10 @@ animations = [ {
 "loop": true,
 "name": "Fall",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "Walk",
-"speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 26.3145
-height = 43.0471
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 25.7552, 46.0056 )
 
 [sub_resource type="Animation" id=4]
 length = 0.6
@@ -88,6 +87,7 @@ tracks/0/keys = {
 [node name="Player" type="KinematicBody2D" groups=[
 "Player",
 ]]
+z_index = 1
 script = ExtResource( 5 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
@@ -96,7 +96,8 @@ frames = SubResource( 2 )
 animation = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+position = Vector2( 0, 0.475655 )
+shape = SubResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 0, -200 )
@@ -117,3 +118,35 @@ color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BounceRaycasts" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="BounceRaycasts"]
+position = Vector2( 0, 46 )
+cast_to = Vector2( 0, 4 )
+collision_mask = 2
+collide_with_areas = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="BounceRaycasts"]
+position = Vector2( -25, 46 )
+cast_to = Vector2( 0, 4 )
+collision_mask = 2
+collide_with_areas = true
+
+[node name="RayCast2D3" type="RayCast2D" parent="BounceRaycasts"]
+position = Vector2( 25, 46 )
+cast_to = Vector2( 0, 4 )
+collision_mask = 2
+collide_with_areas = true
+
+[node name="RayCast2D4" type="RayCast2D" parent="BounceRaycasts"]
+position = Vector2( -12, 46 )
+cast_to = Vector2( 0, 4 )
+collision_mask = 2
+collide_with_areas = true
+
+[node name="RayCast2D5" type="RayCast2D" parent="BounceRaycasts"]
+position = Vector2( 12, 46 )
+cast_to = Vector2( 0, 4 )
+collision_mask = 2
+collide_with_areas = true

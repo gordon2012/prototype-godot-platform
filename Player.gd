@@ -3,8 +3,11 @@ extends KinematicBody2D
 const UP = Vector2(0, -1)
 const GRAVITY = 20
 const JUMP_HEIGHT = -550
+const BOUNCE_VELOCITY = -400
 
 var motion = Vector2()
+
+onready var bounce_raycasts = $BounceRaycasts
 
 func _ready():
 	$FadeCanvasLayer/FadeColorRect.show()
@@ -14,7 +17,7 @@ func _ready():
 	else:
 		get_node("AnimationPlayer").play("_SETUP")
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	motion.y+= GRAVITY
 
 	if Input.is_action_pressed("ui_right"):
@@ -38,6 +41,8 @@ func _physics_process(_delta):
 		else:
 			$Sprite.play("Fall")
 
+	_check_bounce(delta)
+
 	motion = move_and_slide(motion, UP)
 
 func fade_out():
@@ -53,3 +58,16 @@ func teleport_to(target):
 
 	position = target
 	fade_in()
+
+func _check_bounce(delta):
+	if motion.y > 0:
+		for raycast in bounce_raycasts.get_children():
+			raycast.cast_to = Vector2.DOWN * motion * delta + Vector2.DOWN
+			raycast.force_raycast_update()
+			if raycast.is_colliding() && raycast.get_collision_normal() == Vector2.UP:
+				motion.y = (raycast.get_collision_point() - raycast.global_position - Vector2.DOWN).y / delta
+				raycast.get_collider().entity.call_deferred("be_bounced_upon", self)
+				break
+
+func bounce(bounce_velocity = BOUNCE_VELOCITY):
+	motion.y = bounce_velocity
