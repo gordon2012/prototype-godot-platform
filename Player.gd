@@ -16,6 +16,7 @@ func _ready():
 		Global.teleport_target = null
 	else:
 		get_node("AnimationPlayer").play("_SETUP")
+	updateScore()
 
 func _physics_process(delta):
 	motion.y+= GRAVITY
@@ -71,3 +72,6 @@ func _check_bounce(delta):
 
 func bounce(bounce_velocity = BOUNCE_VELOCITY):
 	motion.y = bounce_velocity
+
+func updateScore():
+	get_node("Score/UI/Base/ScoreLabel").text = "SCORE: " + str(Global.score)

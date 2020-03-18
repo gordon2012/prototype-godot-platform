@@ -45,6 +45,7 @@ enter_door={
 
 2d_physics/layer_1="standard"
 2d_physics/layer_2="bounce"
+2d_physics/layer_3="player"
 
 [memory]
 

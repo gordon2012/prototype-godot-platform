@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://BrownAbstractAtlas.tres" type="TileSet" id=4]
 [ext_resource path="res://Tiles/abstract/AbstractAutoTile.tres" type="TileSet" id=5]
 [ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Items/Coin.tscn" type="PackedScene" id=7]
 
 [node name="World3" type="Node"]
 
@@ -35,7 +36,7 @@ outer_world = "res://World2.tscn"
 outer_target = "Door5"
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -159.805, -2600.92 )
+position = Vector2( 38.2962, 328.018 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 5 )
@@ -50,3 +51,12 @@ position = Vector2( -160.149, -162.589 )
 
 [node name="Enemy3" parent="." instance=ExtResource( 6 )]
 position = Vector2( 876.456, 525.571 )
+
+[node name="Coin" parent="." instance=ExtResource( 7 )]
+position = Vector2( 143.487, 289.483 )
+
+[node name="Coin2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 350.103, 294.767 )
+
+[node name="Coin3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 431.596, 305.459 )

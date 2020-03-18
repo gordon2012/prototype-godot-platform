@@ -15,16 +15,6 @@ shader_param/modulate = Color( 0, 0, 0, 0.501961 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "Walk",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "Jump",
@@ -34,9 +24,19 @@ animations = [ {
 "loop": true,
 "name": "Fall",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 25.7552, 46.0056 )
 
 [sub_resource type="Animation" id=4]
@@ -88,6 +88,7 @@ tracks/0/keys = {
 "Player",
 ]]
 z_index = 1
+collision_layer = 5
 script = ExtResource( 5 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
@@ -97,7 +98,7 @@ animation = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.475655 )
-shape = SubResource( 7 )
+shape = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 0, -200 )
@@ -150,3 +151,32 @@ position = Vector2( 12, 46 )
 cast_to = Vector2( 0, 4 )
 collision_mask = 2
 collide_with_areas = true
+
+[node name="Score" type="Node" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="Score"]
+scale = Vector2( 4, 4 )
+transform = Transform2D( 4, 0, 0, 4, 0, 0 )
+
+[node name="Base" type="Control" parent="Score/UI"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 2608.0
+margin_bottom = 1599.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="Score/UI/Base"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.878431, 0.87451, 0.227451, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = -1
+custom_constants/line_spacing = 22
+custom_constants/shadow_as_outline = 1
+text = "SCORE: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
