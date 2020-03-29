@@ -9,6 +9,12 @@ var motion = Vector2()
 
 onready var bounce_raycasts = $BounceRaycasts
 
+# health bar
+const MAX_HEALTH = 16
+const HEART_ROW_SIZE = 8
+const HEART_OFFSET = 56
+onready var hearts = $Score/UI/hearts
+
 func _ready():
 	$FadeCanvasLayer/FadeColorRect.show()
 	if Global.teleport_target != null:
@@ -17,6 +23,13 @@ func _ready():
 	else:
 		get_node("AnimationPlayer").play("_SETUP")
 	updateScore()
+	
+	# health bar
+	for i in MAX_HEALTH:
+		var new_heart = Sprite.new()
+		new_heart.texture = hearts.texture
+		new_heart.hframes = hearts.hframes
+		hearts.add_child(new_heart)
 
 func _physics_process(delta):
 	motion.y+= GRAVITY
@@ -45,6 +58,26 @@ func _physics_process(delta):
 	_check_bounce(delta)
 
 	motion = move_and_slide(motion, UP)
+	
+	# health bar (maybe process instead of physics?)
+	for heart in hearts.get_children():
+		var index = heart.get_index()
+		var x = (index % HEART_ROW_SIZE) * HEART_OFFSET
+		var y = (index / HEART_ROW_SIZE) * HEART_OFFSET
+		
+		heart.position = Vector2(x, y)
+		# heart.position = Vector2(x + hearts.position.x, y + hearts.position.y)
+		# heart.position = Vector2(x + 100, y + 20)
+		
+		var player_health = 4.25
+		#
+		var last_heart = floor(player_health)
+		if index > last_heart:
+			heart.frame = 0
+		if index == last_heart:
+			heart.frame = (player_health - last_heart) * 4
+		if index < last_heart:
+			heart.frame = 4
 
 func fade_out():
 	get_node("AnimationPlayer").play("FadeOut")
