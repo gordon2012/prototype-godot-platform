@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Enemies/rocks3.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Enemy.gd" type="Script" id=2]
@@ -41,14 +41,19 @@ animations = [ {
 "speed": 12.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 7, 6 )
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 6, 4 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 6.31857, 1.54008 )
 
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 8, 4 )
+
 [node name="Enemy" type="KinematicBody2D"]
 scale = Vector2( 4, 4 )
+collision_layer = 0
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="sprite" type="AnimatedSprite" parent="."]
@@ -57,7 +62,7 @@ animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="ray" type="RayCast2D" parent="."]
 position = Vector2( -6, 0 )
@@ -69,4 +74,13 @@ cast_to = Vector2( 0, 8 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceArea"]
 position = Vector2( 0, -3.42576 )
 shape = SubResource( 9 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, 1 )
+shape = SubResource( 11 )
 [connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

@@ -7,7 +7,15 @@ const BOUNCE_VELOCITY = -400
 
 var motion = Vector2()
 
+var hit = 0
+
 onready var bounce_raycasts = $BounceRaycasts
+
+# health bar
+const MAX_HEALTH = 16
+const HEART_ROW_SIZE = 8
+const HEART_OFFSET = 56
+onready var hearts = $Score/UI/hearts
 
 func _ready():
 	$FadeCanvasLayer/FadeColorRect.show()
@@ -17,6 +25,13 @@ func _ready():
 	else:
 		get_node("AnimationPlayer").play("_SETUP")
 	updateScore()
+	
+	# health bar
+	for i in MAX_HEALTH:
+		var new_heart = Sprite.new()
+		new_heart.texture = hearts.texture
+		new_heart.hframes = hearts.hframes
+		hearts.add_child(new_heart)
 
 func _physics_process(delta):
 	motion.y+= GRAVITY
@@ -33,6 +48,9 @@ func _physics_process(delta):
 		motion.x = 0
 		$Sprite.play("Idle")
 
+	motion.x += hit
+	hit = 0
+
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_select"):
 			motion.y = JUMP_HEIGHT
@@ -45,6 +63,21 @@ func _physics_process(delta):
 	_check_bounce(delta)
 
 	motion = move_and_slide(motion, UP)
+
+	# health bar (maybe process instead of physics?)
+	for heart in hearts.get_children():
+		var index = heart.get_index()
+		var x = (index % HEART_ROW_SIZE) * HEART_OFFSET
+		var y = (index / HEART_ROW_SIZE) * HEART_OFFSET
+
+		heart.position = Vector2(x, y)
+		var last_heart = floor(Global.hp)
+		if index > last_heart:
+			heart.frame = 0
+		if index == last_heart:
+			heart.frame = (Global.hp - last_heart) * 4
+		if index < last_heart:
+			heart.frame = 4
 
 func fade_out():
 	get_node("AnimationPlayer").play("FadeOut")
@@ -75,3 +108,8 @@ func bounce(bounce_velocity = BOUNCE_VELOCITY):
 
 func updateScore():
 	get_node("Score/UI/Base/ScoreLabel").text = "SCORE: " + str(Global.score)
+
+func getHit(direction):
+	#hit delay
+	hit = 1000 * -direction
+	Global.hp-= 0.25
