@@ -7,6 +7,8 @@ const BOUNCE_VELOCITY = -400
 
 var motion = Vector2()
 
+var hit = 0
+
 onready var bounce_raycasts = $BounceRaycasts
 
 # health bar
@@ -46,6 +48,9 @@ func _physics_process(delta):
 		motion.x = 0
 		$Sprite.play("Idle")
 
+	motion.x += hit
+	hit = 0
+
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_select"):
 			motion.y = JUMP_HEIGHT
@@ -58,24 +63,19 @@ func _physics_process(delta):
 	_check_bounce(delta)
 
 	motion = move_and_slide(motion, UP)
-	
+
 	# health bar (maybe process instead of physics?)
 	for heart in hearts.get_children():
 		var index = heart.get_index()
 		var x = (index % HEART_ROW_SIZE) * HEART_OFFSET
 		var y = (index / HEART_ROW_SIZE) * HEART_OFFSET
-		
+
 		heart.position = Vector2(x, y)
-		# heart.position = Vector2(x + hearts.position.x, y + hearts.position.y)
-		# heart.position = Vector2(x + 100, y + 20)
-		
-		var player_health = 4.25
-		#
-		var last_heart = floor(player_health)
+		var last_heart = floor(Global.hp)
 		if index > last_heart:
 			heart.frame = 0
 		if index == last_heart:
-			heart.frame = (player_health - last_heart) * 4
+			heart.frame = (Global.hp - last_heart) * 4
 		if index < last_heart:
 			heart.frame = 4
 
@@ -108,3 +108,8 @@ func bounce(bounce_velocity = BOUNCE_VELOCITY):
 
 func updateScore():
 	get_node("Score/UI/Base/ScoreLabel").text = "SCORE: " + str(Global.score)
+
+func getHit(direction):
+	#hit delay
+	hit = 1000 * -direction
+	Global.hp-= 0.25

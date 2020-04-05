@@ -9,7 +9,9 @@ var velocity = Vector2()
 var direction = 1
 var dead = false
 
-func _physics_process(delta):
+onready var player = get_tree().get_root().find_node("Player", true, false)
+
+func _physics_process(_delta):
 	if dead:
 		return
 	
@@ -39,4 +41,8 @@ func be_bounced_upon(bouncer):
 func _on_sprite_animation_finished():
 	print("anim done")
 	remove_child($CollisionShape2D)
+	remove_child($Hitbox)
 	remove_child($BounceArea)
+
+func _on_Hitbox_area_entered(_area):
+	player.getHit(direction)

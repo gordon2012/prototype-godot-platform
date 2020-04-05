@@ -43,9 +43,10 @@ enter_door={
 
 [layer_names]
 
-2d_physics/layer_1="standard"
-2d_physics/layer_2="bounce"
-2d_physics/layer_3="player"
+2d_physics/layer_1="World"
+2d_physics/layer_2="EnemyHurtbox"
+2d_physics/layer_3="Player"
+2d_physics/layer_4="PlayerHurtbox"
 
 [memory]
 

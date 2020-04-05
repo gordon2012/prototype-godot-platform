@@ -16,9 +16,14 @@ shader_param/modulate = Color( 0, 0, 0, 0.501961 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "Fall",
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
@@ -26,14 +31,9 @@ animations = [ {
 "name": "Walk",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "Jump",
+"name": "Fall",
 "speed": 5.0
 } ]
 
@@ -89,7 +89,7 @@ tracks/0/keys = {
 "Player",
 ]]
 z_index = 1
-collision_layer = 5
+collision_layer = 4
 script = ExtResource( 7 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
@@ -98,6 +98,14 @@ frames = SubResource( 2 )
 animation = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.475655 )
+shape = SubResource( 3 )
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, 0.475655 )
 shape = SubResource( 3 )
 
@@ -159,18 +167,29 @@ collide_with_areas = true
 scale = Vector2( 4, 4 )
 transform = Transform2D( 4, 0, 0, 4, 0, 0 )
 
+[node name="hearts" type="Sprite" parent="Score/UI"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 8 )
+hframes = 5
+
 [node name="Base" type="Control" parent="Score/UI"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 2608.0
-margin_bottom = 1599.0
+margin_left = 84.2643
+margin_top = 0.175591
+margin_right = 2690.26
+margin_bottom = 1597.18
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScoreLabel" type="Label" parent="Score/UI/Base"]
+anchor_left = -0.002
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 41.212
+margin_top = 2.0
+margin_right = 1.0
+margin_bottom = -7.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0.878431, 0.87451, 0.227451, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -181,10 +200,3 @@ text = "SCORE: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="hearts" type="Sprite" parent="Score/UI"]
-position = Vector2( 216, 8 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 8 )
-centered = false
-hframes = 5
